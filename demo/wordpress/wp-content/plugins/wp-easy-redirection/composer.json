@@ -1,0 +1,15 @@
+{
+    "name": "cyril/wp-easy-redirection",
+    "autoload": {
+        "psr-4": {
+            "WpEasyRedirection\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "seeren",
+            "email": "consultant@seeren.fr"
+        }
+    ],
+    "require": {}
+}
