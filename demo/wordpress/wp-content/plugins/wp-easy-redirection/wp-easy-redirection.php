@@ -9,11 +9,13 @@
  * License: MIT
  */
 
-use WpEasyRedirection\Admin\AdminController;
+use WpEasyRedirection\Controller\Admin\AdminController;
 
 require __DIR__ . '/vendor/autoload.php';
 
+define('WP_EASY_REDIRECTION_FILE', __FILE__);
+
 if (is_admin()) {
     $controller = new AdminController();
-    $controller->show(__FILE__);
+    $controller->show();
 }

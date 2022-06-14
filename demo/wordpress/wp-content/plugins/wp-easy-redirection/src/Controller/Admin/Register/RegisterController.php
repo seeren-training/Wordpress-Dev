@@ -1,27 +1,23 @@
 <?php
 
-namespace WpEasyRedirection\Admin\Register;
+namespace WpEasyRedirection\Controller\Admin\Register;
 
-use WpEasyRedirection\Controller;
+use WpEasyRedirection\Controller\Controller;
 
 class RegisterController extends Controller
 {
 
-    public function __construct(private string $filename)
-    {
-    }
-
     public function register(): void
     {
-        register_activation_hook($this->filename, [$this, 'activate']);
-        register_deactivation_hook($this->filename, [$this, 'deactivate']);
+        register_activation_hook(WP_EASY_REDIRECTION_FILE, [$this, 'activate']);
+        register_deactivation_hook(WP_EASY_REDIRECTION_FILE, [$this, 'deactivate']);
     }
 
     public function activate(): void
     {
         $phpversion = phpversion();
         if ((int) $phpversion < 8) {
-            wp_die($this->render('admin/activate.html.php', [
+            wp_die($this->render('admin/register/register.html.php', [
                 'phpversion' => $phpversion
             ]));
         }
