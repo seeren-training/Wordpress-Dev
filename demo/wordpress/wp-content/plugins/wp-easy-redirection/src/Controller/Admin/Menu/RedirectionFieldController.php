@@ -29,18 +29,33 @@ class RedirectionFieldController extends Controller
                 $sectionId
             );
         });
+        add_action('wp_ajax_redirection_update', function () use ($field) {
+            check_ajax_referer('redirection_list');
+            $this->delete($_POST['redirection_id'], $field);
+            wp_die();
+        });
     }
 
     public function show(Field $field)
     {
         if (filter_input(INPUT_GET, 'settings-updated')) {
-            set_transient( 'last_redirection_visit', date('H:i:s'), 60*60*24 );
+            set_transient('last_redirection_visit', date('H:i:s'), 60 * 60 * 24);
         }
         $redirectionList = get_option($field->getSettingId());
         echo $this->render('admin/menu/redirection_field/show.html.php', [
             'title' => $field->getFieldTitle(),
-            'redirectionList' => $redirectionList,
+            'redirection_list' => $redirectionList,
             'setting_id' => $field->getSettingId(),
+            'nonce' => wp_create_nonce('redirection_list'),
+            'ajax_url' => admin_url('admin-ajax.php'),
         ]);
+    }
+
+    public function delete(int $id, Field $field)
+    {
+        $redirectionList = get_option($field->getSettingId());
+        array_splice($redirectionList, $id, 1);
+        update_option($field->getSettingId(), $redirectionList);
+        var_dump($redirectionList);
     }
 }
