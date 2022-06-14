@@ -21,6 +21,11 @@ class RegisterController extends Controller
                 'phpversion' => $phpversion
             ]));
         }
+        foreach (['mo', 'po'] as $extension) {
+            $source = __DIR__ . '/../../../../languages/wp-easy-redirection-fr_FR.' . $extension;
+            $destination = __DIR__ . '/../../../../../../languages/plugins/wp-easy-redirection-fr_FR.'  . $extension;
+            copy($source, $destination);
+        }
         flush_rewrite_rules();
     }
 
