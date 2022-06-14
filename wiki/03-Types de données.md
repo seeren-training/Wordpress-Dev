@@ -207,7 +207,7 @@ ___
 
 Créez une nouvelle meta box dans votre thème enfant pour le type personnalisé créé précédemment
 
-__
+___
 
 ## 📑 Template tags
 
