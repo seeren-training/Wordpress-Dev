@@ -30,7 +30,7 @@ class TopMenuController extends Controller
     {
         echo $this->render('admin/menu/top_menu/show.html.php', [
             'title' => $menu->getPageTitle(),
-            'redirection_slug' =>  $menu->getSlug(),
+            'redirection_slug' =>  'wp_easy_redirection_manage',
         ]);
     }
 }

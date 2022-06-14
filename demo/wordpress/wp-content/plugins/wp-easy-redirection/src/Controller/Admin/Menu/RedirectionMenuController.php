@@ -10,7 +10,7 @@ class RedirectionMenuController extends Controller
 
     public function add(string $parentSlug): void
     {
-        $menu = new Menu('wp_easy_redirection_manage', 'Wp Easy Redirections');
+        $menu = new Menu('wp_easy_redirection_manage', 'Redirections');
         add_action('admin_menu', function () use ($menu, $parentSlug) {
             add_submenu_page(
                 $parentSlug,

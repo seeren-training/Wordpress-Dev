@@ -33,9 +33,10 @@ class RedirectionFieldController extends Controller
 
     public function show(Field $field)
     {
+        $redirectionList = get_option($field->getSettingId());
         echo $this->render('admin/menu/redirection_field/show.html.php', [
             'title' => $field->getFieldTitle(),
-            'setting' => get_option($field->getSettingId()),
+            'redirectionList' => $redirectionList,
             'setting_id' => $field->getSettingId(),
         ]);
     }
