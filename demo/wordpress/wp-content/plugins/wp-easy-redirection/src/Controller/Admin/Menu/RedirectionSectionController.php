@@ -27,6 +27,8 @@ class RedirectionSectionController extends Controller
 
     public function show()
     {
-        echo $this->render('admin/menu/redirection_section/show.html.php');
+        echo $this->render('admin/menu/redirection_section/show.html.php', [
+            'last_update' => get_transient( 'last_redirection_visit')
+        ]);
     }
 }

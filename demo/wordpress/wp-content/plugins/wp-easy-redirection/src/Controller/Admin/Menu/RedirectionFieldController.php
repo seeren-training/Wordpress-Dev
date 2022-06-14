@@ -33,6 +33,9 @@ class RedirectionFieldController extends Controller
 
     public function show(Field $field)
     {
+        if (filter_input(INPUT_GET, 'settings-updated')) {
+            set_transient( 'last_redirection_visit', date('H:i:s'), 60*60*24 );
+        }
         $redirectionList = get_option($field->getSettingId());
         echo $this->render('admin/menu/redirection_field/show.html.php', [
             'title' => $field->getFieldTitle(),
