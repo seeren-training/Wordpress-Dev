@@ -169,7 +169,7 @@ Vous pouvez spécifier l'emplacement de l'installation.
 },
 ```
 
-### 🏷️ **Compsoer**
+### 🏷️ **Composer**
 
 Maintenant vous pouvez installer et cartographier vos dépendances en ligne de commande.
 
