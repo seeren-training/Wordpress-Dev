@@ -7,6 +7,8 @@
  * Version: 0.0.1
  * Text Domain: wp-easy-redirection
  * License: MIT
+ * Text Domain: wp-easy-redirection
+ * Domain Path: /languages
  */
 
 use WpEasyRedirection\Controller\Admin\AdminController;
