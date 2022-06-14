@@ -2,41 +2,35 @@
 
 namespace WpEasyRedirection\Controller\Admin\Menu;
 
-class TopMenuController extends MenuController
+use WpEasyRedirection\Controller\Controller;
+use WpEasyRedirection\Model\Menu;
+
+class TopMenuController extends Controller
 {
-
-    private RedirectionMenuController $redirectionMenu;
-
-    public function __construct()
-    {
-        parent::__construct(
-            'wp_easy_redirection',
-            'Wp Easy Redirection',
-        );
-        $this->redirectionMenu = new RedirectionMenuController();
-    }
 
     public function add(): void
     {
-        add_action('admin_menu', function () {
+        $menu = new Menu('wp_easy_redirection', 'Wp Easy Redirection');
+        add_action('admin_menu', function () use ($menu) {
             add_menu_page(
-                $this->pageTitle,
-                $this->menuTitle,
-                self::CAPABILITY,
-                $this->slug,
-                function () {
-                    $this->show();
+                $menu->getPageTitle(),
+                $menu->getMenuTitle(),
+                Menu::CAPABILITY,
+                $menu->getSlug(),
+                function () use ($menu) {
+                    $this->show($menu);
                 }
             );
         });
-        $this->redirectionMenu->add($this->slug);
+        $redirectionMenu = new RedirectionMenuController();
+        $redirectionMenu->add($menu->getSlug());
     }
 
-    public function show()
+    public function show(Menu $menu)
     {
         echo $this->render('admin/menu/top_menu/show.html.php', [
-            'title' => $this->pageTitle,
-            'redirection_slug' =>  $this->redirectionMenu->getSlug(),
+            'title' => $menu->getPageTitle(),
+            'redirection_slug' =>  $menu->getSlug(),
         ]);
     }
 }

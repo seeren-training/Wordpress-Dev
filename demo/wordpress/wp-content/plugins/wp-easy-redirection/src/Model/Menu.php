@@ -1,17 +1,17 @@
 <?php
 
-namespace WpEasyRedirection\Controller\Admin\Menu;
+namespace WpEasyRedirection\Model;
 
-use WpEasyRedirection\Controller\Controller;
-
-class MenuController extends Controller
+class Menu
 {
 
     public const CAPABILITY = 'manage_options';
 
+    private string $menuTitle;
+
     public function __construct(
-        protected string $slug,
-        protected string $pageTitle
+        private string $slug,
+        private string $pageTitle
     ) {
         $this->menuTitle = $this->pageTitle;
     }

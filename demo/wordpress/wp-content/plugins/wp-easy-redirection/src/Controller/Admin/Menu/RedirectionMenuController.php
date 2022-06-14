@@ -2,37 +2,35 @@
 
 namespace WpEasyRedirection\Controller\Admin\Menu;
 
-class RedirectionMenuController extends MenuController
-{
+use WpEasyRedirection\Controller\Controller;
+use WpEasyRedirection\Model\Menu;
 
-    public function __construct()
-    {
-        parent::__construct(
-            'wp_easy_redirection_manage',
-            'Redirections',
-        );
-    }
+class RedirectionMenuController extends Controller
+{
 
     public function add(string $parentSlug): void
     {
-        add_action('admin_menu', function () use ($parentSlug) {
+        $menu = new Menu('wp_easy_redirection_manage', 'Wp Easy Redirections');
+        add_action('admin_menu', function () use ($menu, $parentSlug) {
             add_submenu_page(
                 $parentSlug,
-                $this->pageTitle,
-                $this->menuTitle,
-                self::CAPABILITY,
-                $this->slug,
-                function () {
-                    $this->show();
+                $menu->getPageTitle(),
+                $menu->getMenuTitle(),
+                Menu::CAPABILITY,
+                $menu->getSlug(),
+                function () use ($menu) {
+                    $this->show($menu);
                 }
             );
         });
+        $redirectionSection = new RedirectionSectionController();
+        $redirectionSection->add($menu->getPageTitle());
     }
 
-    public function show()
+    public function show(Menu $menu)
     {
         echo $this->render('admin/menu/redirection_menu/show.html.php', [
-            'title' => $this->pageTitle,
+            'title' => $menu->getPageTitle(),
         ]);
     }
 }

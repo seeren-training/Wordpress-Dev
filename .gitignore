@@ -1,3 +1,11 @@
-demo
+/demo/*
+!/demo/wordpress
+/demo/wordpress/*
+!/demo/wordpress/wp-content
+/demo/wordpress/wp-content/*
+!/demo/wordpress/wp-content/plugins
+/demo/wordpress/wp-content/plugins/*
+!/demo/wordpress/wp-content/plugins/wp-easy-redirection/
+/demo/wordpress/wp-content/plugins/wp-easy-redirection/vendor
 node_modules
 .DS_Store
